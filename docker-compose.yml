@@ -1,0 +1,6 @@
+﻿services:
+  semester3-real-estate-back-end:
+    image: semester3-real-estate-back-end
+    build:
+      context: .
+      dockerfile: semester3-real-estate-back-end/Dockerfile

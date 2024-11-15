@@ -1,0 +1,6 @@
+@semester3_real_estate_back_end_HostAddress = http://localhost:5245
+
+GET {{semester3_real_estate_back_end_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
