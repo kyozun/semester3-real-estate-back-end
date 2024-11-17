@@ -4,7 +4,7 @@ public class Direction
 {
     public string DirectionId { get; set; }
     public string Name { get; set; } = string.Empty;
-    
+
     // Navigation Property
     public List<Property> Properties { get; set; }
 }

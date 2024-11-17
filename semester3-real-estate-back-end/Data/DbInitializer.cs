@@ -23,27 +23,14 @@ public class DbInitializer
                 Title = "Doraemon",
                 Description =
                     "Doraemon is the story of a lovable loser named Nobi, and Doraemon the robot cat who comes from the future to help him",
-                 Address = "Ha Noi",
-                 Price = 5000000,
-                 Area = 7.25m,
-                 Floor = 4,
-                 
-            
+                Address = "Ha Noi",
+                Price = 5000000,
+                Area = 7.25m,
+                Floor = 4,
+
+
                 CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-            },
-            new Manga
-            {
-                MangaId = "efe3cd7a-158a-4511-ac37-96bca4ea5ddb",
-                Title = "Chainsaw Man",
-                Description =
-                    "Denji's a poor young man who'll do anything for money, even hunting down devils with his pet devil Pochita. He's a simple man with simple dreams, drowning under a mountain of debt. But his sad life gets turned upside down one day when he's betrayed by someone he trusts",
-                Year = 2000,
-                ViewCount = 0,
-                MangaStatus = MangaStatus.Completed,
-                IsLock = true,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now
             }
         );
 

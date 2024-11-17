@@ -40,16 +40,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="DTO\" />
-      <Folder Include="Helpers\Enums\" />
-      <Folder Include="Helpers\Query\" />
-      <Folder Include="Helpers\Validation\" />
-      <Folder Include="Interfaces\" />
-      <Folder Include="Mapper\" />
-      <Folder Include="Repository\" />
-      <Folder Include="Services\" />
+      <Folder Include="DTO\Category\" />
+      <Folder Include="Helpers\" />
       <Folder Include="Validation\" />
-      <Folder Include="Wrapper\" />
     </ItemGroup>
 
 </Project>

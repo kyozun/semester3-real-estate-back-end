@@ -9,5 +9,4 @@ public class User : IdentityUser
 
 
     // Navigation Property
-     
 }
