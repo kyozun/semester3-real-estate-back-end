@@ -2,7 +2,6 @@
 
 public class CustomListDto
 {
-    public string Name { get; set; } = string.Empty;
-    public bool IsPublic { get; set; }
+    public string Name { get; set; } 
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 }

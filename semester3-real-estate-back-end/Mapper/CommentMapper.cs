@@ -1,4 +1,4 @@
-using semester4.DTO.Comment;
+using semester3_real_estate_back_end.DTO.Comment;
 
 namespace semester4.Mapper;
 

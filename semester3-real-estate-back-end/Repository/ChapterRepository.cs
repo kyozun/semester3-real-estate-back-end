@@ -152,19 +152,19 @@ public class ChapterRepository : IChapterRepository
         return HttpStatusCode.OK;
     }
 
-    public async Task<HttpStatusCode> UpdateChapter(UpdateChapterDto updateChapterDto)
+    public async Task<HttpStatusCode> UpdateChapter(UpdatePropertyImageDto updatePropertyImageDto)
     {
         var isAdmin = _httpContextAccessor.HttpContext!.User.IsInRole("Admin");
 
         // Tìm chapter theo chapterId, nếu ko có trả về NotFound
-        var chapter = await GetChapterById(updateChapterDto.ChapterId.ToString()!);
+        var chapter = await GetChapterById(updatePropertyImageDto.ChapterId.ToString()!);
 
         if (chapter == null) return HttpStatusCode.NotFound;
 
-        if (updateChapterDto.Title != null)
+        if (updatePropertyImageDto.Title != null)
         {
             var existingChapter =
-                await _context.Chapter.FirstOrDefaultAsync(x => x.Title.ToLower() == updateChapterDto.Title.ToLower());
+                await _context.Chapter.FirstOrDefaultAsync(x => x.Title.ToLower() == updatePropertyImageDto.Title.ToLower());
             if (existingChapter != null)
                 // Nếu đã tồn tại, trả về lỗi Conflict (409)
                 return HttpStatusCode.Conflict;
@@ -178,9 +178,9 @@ public class ChapterRepository : IChapterRepository
 
 
         // Cập nhật lại chapter
-        if (updateChapterDto.Title != null) chapter.Title = updateChapterDto.Title;
-        if (updateChapterDto.ChapterNumber.HasValue) chapter.ChapterNumber = (int)updateChapterDto.ChapterNumber;
-        if (updateChapterDto.VolumeNumber.HasValue) chapter.VolumeNumber = (int)updateChapterDto.VolumeNumber;
+        if (updatePropertyImageDto.Title != null) chapter.Title = updatePropertyImageDto.Title;
+        if (updatePropertyImageDto.ChapterNumber.HasValue) chapter.ChapterNumber = (int)updatePropertyImageDto.ChapterNumber;
+        if (updatePropertyImageDto.VolumeNumber.HasValue) chapter.VolumeNumber = (int)updatePropertyImageDto.VolumeNumber;
         chapter.UpdatedAt = DateTime.Now;
 
         try

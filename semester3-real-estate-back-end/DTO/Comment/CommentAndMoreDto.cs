@@ -1,13 +1,13 @@
-using semester4.DTO.Manga;
-using semester4.DTO.User;
+using semester3_real_estate_back_end.DTO.Property;
+using semester3_real_estate_back_end.DTO.User;
 
-namespace semester4.DTO.Comment;
+namespace semester3_real_estate_back_end.DTO.Comment;
 
 public class CommentAndMoreDto
 {
-    public string Id { get; set; } = string.Empty;
-    public string Name { get; set; } = string.Empty;
+    public string CommentId { get; set; }
+    public string Name { get; set; }
     public DateTime CreatedAt { get; set; }
     public UserDto? User { get; set; }
-    public MangaDto? Manga { get; set; }
+    public PropertyDto? Property { get; set; }
 }

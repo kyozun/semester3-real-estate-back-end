@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using semester3_real_estate_back_end.DTO.CoverArt;
 using semester4.DTO.CoverArt;
 using semester4.Helpers.Enums.Include;
 using semester4.Helpers.Query;

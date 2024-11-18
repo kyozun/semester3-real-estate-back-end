@@ -1,6 +1,8 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using semester4.DTO.Category;
+using semester3_real_estate_back_end.DTO.Category;
+using semester3_real_estate_back_end.Helpers.Query;
+using semester3_real_estate_back_end.Interfaces;
 using semester4.Helpers.Enums.Include;
 using semester4.Helpers.Query;
 using semester4.Interfaces;

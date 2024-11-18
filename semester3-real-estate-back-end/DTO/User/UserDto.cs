@@ -1,4 +1,4 @@
-﻿namespace semester4.DTO.User;
+﻿namespace semester3_real_estate_back_end.DTO.User;
 
 public class UserDto
 {

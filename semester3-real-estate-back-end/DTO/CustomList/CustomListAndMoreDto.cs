@@ -1,16 +1,13 @@
-﻿using semester4.DTO.Manga;
-using semester4.DTO.User;
+﻿using semester3_real_estate_back_end.DTO.Property;
+using semester3_real_estate_back_end.DTO.User;
 
-namespace semester4.DTO.CustomList;
+namespace semester3_real_estate_back_end.DTO.CustomList;
 
 public class CustomListAndMoreDto
 {
     public string Id { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
-    public bool IsPublic { get; set; }
     public DateTime CreatedAt { get; set; }
     public UserDto? User { get; set; }
-    public MangaDto? Manga { get; set; }
-
-    public List<MangaDto> Mangas { get; set; }
+    public PropertyDto? Property { get; set; }
 }

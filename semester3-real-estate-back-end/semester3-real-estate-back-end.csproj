@@ -40,7 +40,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="DTO\Category\" />
       <Folder Include="Helpers\" />
       <Folder Include="Validation\" />
     </ItemGroup>

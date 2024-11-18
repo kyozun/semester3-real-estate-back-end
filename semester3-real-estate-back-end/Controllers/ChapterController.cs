@@ -1,6 +1,7 @@
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using semester3_real_estate_back_end.DTO.PropertyImage;
 using semester4.DTO.Chapter;
 using semester4.Helpers.Enums.Include;
 using semester4.Helpers.Query;
@@ -25,7 +26,7 @@ public class ChapterController : ControllerBase
 
     [SwaggerOperation(Summary = "Tìm Chapter theo điều kiện")]
     [HttpGet]
-    public async Task<ActionResult<Response<ChapterAndMoreDto>>> GetChapters([FromQuery] ChapterQuery chapterQuery)
+    public async Task<ActionResult<Response<PropertyImageAndMoreDto>>> GetChapters([FromQuery] ChapterQuery chapterQuery)
     {
         try
         {
@@ -34,7 +35,7 @@ public class ChapterController : ControllerBase
             var total = chapterAndMoreDtos.Count;
             var limit = chapterQuery.Limit;
             var offset = chapterQuery.Offset;
-            return Ok(new Response<ChapterAndMoreDto>(chapterAndMoreDtos, total, limit, offset));
+            return Ok(new Response<PropertyImageAndMoreDto>(chapterAndMoreDtos, total, limit, offset));
         }
         catch (Exception)
         {
@@ -47,7 +48,7 @@ public class ChapterController : ControllerBase
     [SwaggerOperation(Summary = "Lấy Chapter theo ID")]
     [HttpGet]
     [Route("{chapterId:guid}")]
-    public async Task<ActionResult<ChapterAndMoreDto>> GetChapterById([FromRoute] Guid chapterId,
+    public async Task<ActionResult<PropertyImageAndMoreDto>> GetChapterById([FromRoute] Guid chapterId,
         [FromQuery] List<ChapterInclude> includes)
     {
         try
@@ -67,11 +68,11 @@ public class ChapterController : ControllerBase
     [SwaggerOperation(Summary = "Tạo Chapter")]
     [HttpPost]
     [Authorize]
-    public async Task<ActionResult> CreateChapter([FromBody] CreateChapterDto createChapterDto)
+    public async Task<ActionResult> CreateChapter([FromBody] CreatePropertyImageDto createPropertyImageDto)
     {
         try
         {
-            var chapter = createChapterDto.ConvertToChapter();
+            var chapter = createPropertyImageDto.ConvertToChapter();
             var result = await _chapterRepository.CreateChapter(chapter);
             return result switch
             {
@@ -92,11 +93,11 @@ public class ChapterController : ControllerBase
     [SwaggerOperation(Summary = "Cập nhật Chapter")]
     [HttpPut]
     [Authorize]
-    public async Task<ActionResult> UpdateChapter([FromBody] UpdateChapterDto updateChapterDto)
+    public async Task<ActionResult> UpdateChapter([FromBody] UpdatePropertyImageDto updatePropertyImageDto)
     {
         try
         {
-            var result = await _chapterRepository.UpdateChapter(updateChapterDto);
+            var result = await _chapterRepository.UpdateChapter(updatePropertyImageDto);
             return result switch
             {
                 HttpStatusCode.OK => Ok(new OkResponse()),
@@ -107,7 +108,7 @@ public class ChapterController : ControllerBase
         }
         catch (Exception)
         {
-            if (!await _chapterRepository.ChapterExistsAsync(updateChapterDto.ChapterId.ToString())) return NotFound();
+            if (!await _chapterRepository.ChapterExistsAsync(updatePropertyImageDto.ChapterId.ToString())) return NotFound();
 
             return BadRequest();
         }

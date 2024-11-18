@@ -1,8 +1,8 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using semester3_real_estate_back_end.DTO.Comment;
 using semester4.DTO.ChapterComment;
-using semester4.DTO.Comment;
 using semester4.Helpers.Query;
 using semester4.Interfaces;
 using semester4.Mapper;

@@ -11,7 +11,7 @@ public interface IChapterRepository
     Task<IEnumerable<Chapter>> GetChapters(ChapterQuery chapterQuery);
     Task<Chapter?> GetChapterById(string chapterId, [Optional] List<ChapterInclude> includes);
     Task<HttpStatusCode> CreateChapter(Chapter chapter);
-    Task<HttpStatusCode> UpdateChapter(UpdateChapterDto updateChapterDto);
+    Task<HttpStatusCode> UpdateChapter(UpdatePropertyImageDto updatePropertyImageDto);
     Task<HttpStatusCode> DeleteChapter(List<Guid> chapterIds);
     Task<bool> ChapterExistsAsync(string chapterId);
 }

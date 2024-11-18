@@ -1,8 +1,6 @@
-using System.ComponentModel.DataAnnotations;
-
-namespace semester4.DTO.Comment;
+namespace semester3_real_estate_back_end.DTO.Comment;
 
 public class UpdateCommentDto
 {
-    [MinLength(6)] public string? Name { get; set; }
+   public string? Name { get; set; }
 }

@@ -1,4 +1,5 @@
-﻿using semester4.DTO.CoverArt;
+﻿using semester3_real_estate_back_end.DTO.CoverArt;
+using semester4.DTO.CoverArt;
 
 namespace semester4.Mapper;
 

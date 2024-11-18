@@ -1,4 +1,4 @@
-namespace semester4.DTO.Comment;
+namespace semester3_real_estate_back_end.DTO.Comment;
 
 public class CommentDto
 {

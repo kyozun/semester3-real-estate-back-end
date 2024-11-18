@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using semester3_real_estate_back_end.DTO.User;
 using semester3_real_estate_back_end.Interfaces;
 using semester3_real_estate_back_end.Models;
-using semester4.DTO.User;
 using semester4.Interfaces;
 using semester4.Wrapper;
 using Swashbuckle.AspNetCore.Annotations;

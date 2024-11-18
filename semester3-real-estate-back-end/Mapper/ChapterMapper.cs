@@ -1,13 +1,14 @@
+using semester3_real_estate_back_end.DTO.PropertyImage;
 using semester4.DTO.Chapter;
 
 namespace semester4.Mapper;
 
 public static class ChapterMapper
 {
-    public static ChapterDto? ConvertToChapterDto(this Chapter? chapter)
+    public static PropertyImageDto? ConvertToChapterDto(this Chapter? chapter)
     {
         if (chapter == null) return null;
-        return new ChapterDto
+        return new PropertyImageDto
         {
             Title = chapter.Title,
             ChapterNumber = chapter.ChapterNumber,
@@ -20,9 +21,9 @@ public static class ChapterMapper
         };
     }
 
-    public static ChapterAndMoreDto ConvertToChapterAndMoreDto(this Chapter chapter)
+    public static PropertyImageAndMoreDto ConvertToChapterAndMoreDto(this Chapter chapter)
     {
-        var dto = new ChapterAndMoreDto
+        var dto = new PropertyImageAndMoreDto
         {
             ChapterId = chapter.ChapterId,
             Title = chapter.Title,
@@ -41,15 +42,15 @@ public static class ChapterMapper
         return dto;
     }
 
-    public static Chapter ConvertToChapter(this CreateChapterDto createChapterDto)
+    public static Chapter ConvertToChapter(this CreatePropertyImageDto createPropertyImageDto)
     {
         return new Chapter
         {
             ChapterId = Guid.NewGuid().ToString(),
-            Title = createChapterDto.Title,
-            ChapterNumber = createChapterDto.ChapterNumber,
-            VolumeNumber = createChapterDto.VolumeNumber,
-            MangaId = createChapterDto.MangaId.ToString()!
+            Title = createPropertyImageDto.Title,
+            ChapterNumber = createPropertyImageDto.ChapterNumber,
+            VolumeNumber = createPropertyImageDto.VolumeNumber,
+            MangaId = createPropertyImageDto.MangaId.ToString()!
         };
     }
 }
