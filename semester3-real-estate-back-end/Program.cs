@@ -8,7 +8,11 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using semester3_real_estate_back_end.Data;
+using semester3_real_estate_back_end.Interfaces;
 using semester3_real_estate_back_end.Models;
+using semester3_real_estate_back_end.Repository;
+using semester3_real_estate_back_end.Services;
+using semester4.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -134,18 +138,19 @@ builder.Services.AddAuthorization(options =>
 
 
 // Repository
-builder.Services.AddScoped<IMangaRepository, MangaRepository>();
-builder.Services.AddScoped<IChapterRepository, ChapterRepository>();
-builder.Services.AddScoped<IGenreRepository, GenreRepository>();
-builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
-builder.Services.AddScoped<IMangaGenreRepository, MangaGenreRepository>();
-builder.Services.AddScoped<IMangaAuthorRepository, MangaAuthorRepository>();
-builder.Services.AddScoped<ICommentRepository, CommentRepository>();
-builder.Services.AddScoped<IChapterCommentRepository, ChapterCommentRepository>();
-builder.Services.AddScoped<ICustomListRepository, CustomListRepository>();
-builder.Services.AddScoped<IRatingRepository, RatingRepository>();
-builder.Services.AddScoped<IUserMangaRepository, UserMangaRepository>();
-builder.Services.AddScoped<ICoverArtRepository, CoverArtRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
+// builder.Services.AddScoped<IChapterRepository, ChapterRepository>();
+// builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+// builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+// builder.Services.AddScoped<IMangaGenreRepository, MangaGenreRepository>();
+// builder.Services.AddScoped<IMangaAuthorRepository, MangaAuthorRepository>();
+// builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+// builder.Services.AddScoped<IChapterCommentRepository, ChapterCommentRepository>();
+// builder.Services.AddScoped<ICustomListRepository, CustomListRepository>();
+// builder.Services.AddScoped<IRatingRepository, RatingRepository>();
+// builder.Services.AddScoped<IUserMangaRepository, UserMangaRepository>();
+// builder.Services.AddScoped<ICoverArtRepository, CoverArtRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IFileService, FileService>();
 

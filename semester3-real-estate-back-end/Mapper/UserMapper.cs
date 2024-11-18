@@ -1,19 +1,18 @@
 ﻿using semester3_real_estate_back_end.DTO.User;
+using semester3_real_estate_back_end.Models;
 
-namespace semester4.Mapper;
+namespace semester3_real_estate_back_end.Mapper;
 
 public static class UserMapper
 {
-    public static UserDto? ConvertToUserDto(this User user)
+    public static UserDto ConvertToUserDto(this User user)
     {
-        if (user.UserName != null && user.Email != null)
             return new UserDto
             {
-                Id = user.Id,
-                UserName = user.UserName,
-                Email = user.Email
+                UserId = user.Id,
+                UserName = user.UserName!,
+                Email = user.Email!
             };
 
-        return null;
     }
 }

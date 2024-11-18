@@ -1,7 +1,6 @@
-﻿namespace semester4.DTO.CustomList;
+﻿namespace semester3_real_estate_back_end.DTO.CustomList;
 
 public class CustomListDto
 {
-    public string Name { get; set; } 
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    
 }

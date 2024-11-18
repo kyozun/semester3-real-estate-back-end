@@ -15,19 +15,150 @@ public class DbInitializer
 
     public void Seed()
     {
+        // Category
+        _modelBuilder.Entity<Category>().HasData(
+            new Category
+            {
+                CategoryId = "ffe56d39-3939-4c5c-ade9-8f147dca9592",
+                Name = "Category 1",
+                UpdatedAt = DateTime.Now,
+            },
+            new Category
+            {
+                CategoryId = "ffe56d39-3939-4c5c-ade9-8f147dca9593",
+                Name = "Category 2",
+                UpdatedAt = DateTime.Now,
+            }
+        );
+
+        // Direction
+        _modelBuilder.Entity<Direction>().HasData(
+            new Direction
+            {
+                DirectionId = "ffe56d39-3939-4c5c-ade9-8f147dca9593",
+                Name = "North",
+            },
+            new Direction
+            {
+                DirectionId = "ffe56d39-3939-4c5c-ade9-8f147dca9594",
+                Name = "South",
+            }
+        );
+
+        // Juridical
+        _modelBuilder.Entity<Juridical>().HasData(
+            new Juridical
+            {
+                JuridicalId = "ffe56d39-3939-4c5c-ade9-8f147dca9594",
+                Name = "Direction 1",
+            }
+        );
+
+        // PropertyType
+        _modelBuilder.Entity<PropertyType>().HasData(
+            new PropertyType
+            {
+                PropertyTypeId = "ffe56d39-3939-4c5c-ade9-8f147dca9595",
+                Name = "PropertyType 1",
+            }
+        );
+
+
+        // Province
+        _modelBuilder.Entity<Province>().HasData(
+            new Province
+            {
+                ProvinceId = "ffe56d39-3939-4c5c-ade9-8f147dca9596",
+                Name = "Province 1",
+            },
+            new Province
+            {
+                ProvinceId = "ffe56d39-3939-4c5c-ade9-8f147dca9597",
+                Name = "Province 2",
+            }
+        );
+
+        // District
+        _modelBuilder.Entity<District>().HasData(
+            new District
+            {
+                DistrictId = "ffe56d39-3939-4c5c-ade9-8f147dca9596",
+                Name = "District 1",
+                ProvinceId = "ffe56d39-3939-4c5c-ade9-8f147dca9596"
+            },
+            new District
+            {
+                DistrictId = "ffe56d39-3939-4c5c-ade9-8f147dca9597",
+                Name = "District 2",
+                ProvinceId = "ffe56d39-3939-4c5c-ade9-8f147dca9596"
+            },
+            new District
+            {
+                DistrictId = "ffe56d39-3939-4c5c-ade9-8f147dca9598",
+                Name = "District 3",
+                ProvinceId = "ffe56d39-3939-4c5c-ade9-8f147dca9597"
+            }
+        );
+
+
+        // Ward
+        _modelBuilder.Entity<Ward>().HasData(
+            new Ward
+            {
+                WardId = "ffe56d39-3939-4c5c-ade9-8f147dca9596",
+                Name = "Ward 1",
+                DistrictId = "ffe56d39-3939-4c5c-ade9-8f147dca9596"
+            },
+            new Ward
+            {
+                WardId = "ffe56d39-3939-4c5c-ade9-8f147dca9597",
+                Name = "Ward 2",
+                DistrictId = "ffe56d39-3939-4c5c-ade9-8f147dca9597"
+            }
+        );
+
         // Property
         _modelBuilder.Entity<Property>().HasData(
             new Property
             {
-                PropertyId = "a72879ca-bfaa-40ba-af21-c93c93723a85",
-                Title = "Doraemon",
-                Description =
-                    "Doraemon is the story of a lovable loser named Nobi, and Doraemon the robot cat who comes from the future to help him",
-                Address = "Ha Noi",
-                Price = 5000000,
-                Area = 7.25m,
-                Floor = 4,
+                PropertyId = "ffe56d39-3939-4c5c-ade9-8f147dca9581",
+                Description = "Description",
+                Title = "Property title 1",
+                Address = "Address 1",
+                Price = 10.00,
+                Area = 10.00,
+                Floor = 1,
+                Bathroom = 1,
+                Bedroom = 1,
 
+                CategoryId = "ffe56d39-3939-4c5c-ade9-8f147dca9592",
+                DirectionId = "ffe56d39-3939-4c5c-ade9-8f147dca9593",
+                JuridicalId = "ffe56d39-3939-4c5c-ade9-8f147dca9594",
+                PropertyTypeId = "ffe56d39-3939-4c5c-ade9-8f147dca9595",
+                WardId = "ffe56d39-3939-4c5c-ade9-8f147dca9596",
+                UserId = "70acc54a-44e0-4d31-8b07-52b5b82e9e55",
+
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now
+            },
+            new Property
+            {
+                PropertyId = "ffe56d39-3939-4c5c-ade9-8f147dca9582",
+                Description = "Description",
+                Title = "Property title 2 ",
+                Address = "Address 2",
+                Price = 20.00,
+                Area = 10.00,
+                Floor = 1,
+                Bathroom = 1,
+                Bedroom = 1,
+
+                CategoryId = "ffe56d39-3939-4c5c-ade9-8f147dca9592",
+                DirectionId = "ffe56d39-3939-4c5c-ade9-8f147dca9594",
+                JuridicalId = "ffe56d39-3939-4c5c-ade9-8f147dca9594",
+                PropertyTypeId = "ffe56d39-3939-4c5c-ade9-8f147dca9595",
+                WardId = "ffe56d39-3939-4c5c-ade9-8f147dca9597",
+                UserId = "70acc54a-44e0-4d31-8b07-52b5b82e9e55",
 
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now

@@ -1,14 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace semester4.DTO.Author;
+﻿namespace semester3_real_estate_back_end.DTO.Category;
 
 public class CreateCategoryDto
 {
-    [MinLength(6)] public required string Name { get; set; }
-
-    [MinLength(20)] public required string Biography { get; set; }
-
-    public string? YoutubeUrl { get; set; }
-    public string? TiktokUrl { get; set; }
-    public string? WebsiteUrl { get; set; }
+    public required string Name { get; set; }
 }

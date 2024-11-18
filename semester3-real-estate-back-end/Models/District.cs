@@ -10,5 +10,5 @@ public class District
 
     //Navigation Property
     public Province Province { get; set; }
-    public List<Ward> WardId { get; set; }
+    public List<Ward> Wards { get; set; }
 }

@@ -12,13 +12,12 @@ public class DataContext : IdentityDbContext<User, Role, string>
 
     public DbSet<Category> Category { get; set; }
     public DbSet<Direction> Direction { get; set; }
-    public DbSet<District> District { get; set; }
+    public DbSet<PropertyType> PropertyType { get; set; }
     public DbSet<Juridical> Juridical { get; set; }
     public DbSet<Property> Property { get; set; }
     public DbSet<PropertyImage> PropertyImage { get; set; }
-    public DbSet<PropertyType> PropertyType { get; set; }
     public DbSet<Province> Province { get; set; }
-    public DbSet<Rating> Rating { get; set; }
+    public DbSet<District> District { get; set; }
     public DbSet<Ward> Ward { get; set; }
 
 

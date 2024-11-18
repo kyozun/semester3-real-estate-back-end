@@ -1,10 +1,10 @@
 using System.ComponentModel.DataAnnotations;
-using semester4.Helpers.Enums;
 
-namespace semester4.DTO.Manga;
+namespace semester3_real_estate_back_end.DTO.Property;
 
 public class UpdatePropertyDto
 {
+    [Required] public Guid? PropertyId { get; set; }
     [Required] public string Title { get; set; }
     [Required] public string Description { get; set; }
     [Required] public string CoverImage { get; set; }
@@ -15,4 +15,7 @@ public class UpdatePropertyDto
     [Required] public int Floor { get; set; }
     [Required] public int Bedroom { get; set; }
     [Required] public int Bathroom { get; set; }
+
+    public List<IFormFile>? NewImages { get; set; }
+    public List<string>? ImagesToRemove { get; set; }
 }

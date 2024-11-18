@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace semester4.Wrapper;
+namespace semester3_real_estate_back_end.Wrapper;
 
 /*data, status, message*/
 public class Response<T>

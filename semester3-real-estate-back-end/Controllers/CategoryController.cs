@@ -3,11 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using semester3_real_estate_back_end.DTO.Category;
 using semester3_real_estate_back_end.Helpers.Query;
 using semester3_real_estate_back_end.Interfaces;
-using semester4.Helpers.Enums.Include;
-using semester4.Helpers.Query;
-using semester4.Interfaces;
-using semester4.Mapper;
-using semester4.Wrapper;
+using semester3_real_estate_back_end.Mapper;
+using semester3_real_estate_back_end.Wrapper;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace semester3_real_estate_back_end.Controllers;
@@ -16,45 +13,38 @@ namespace semester3_real_estate_back_end.Controllers;
 [Route("api/category")]
 public class CategoryController : ControllerBase
 {
-    private readonly ICategoryRepository _categoryRepository;
+    private readonly ICategoryRepository _categoriesRepository;
 
-    public CategoryController(ICategoryRepository categoryRepository)
+    public CategoryController(ICategoryRepository categoriesRepository)
     {
-        _categoryRepository = categoryRepository;
+        _categoriesRepository = categoriesRepository;
     }
 
     // GET
     [SwaggerOperation(Summary = "Tìm Category theo điều kiện")]
     [HttpGet]
-    public async Task<ActionResult<Response<CategoryAndMoreDto>>> GetCategorys([FromQuery] CategoryQuery categoryQuery)
+    public async Task<ActionResult<Response<CategoryAndMoreDto>>> GetCategorys(
+        [FromQuery] CategoryQuery categoriesQuery)
     {
-        try
-        {
-            var categorys = await _categoryRepository.GetCategorys(categoryQuery);
-            var categoryAndMoreDtos = categorys.Select(x => x.ConvertToCategoryAndMoreDto()).ToList();
-            var total = categoryAndMoreDtos.Count;
-            var limit = categoryQuery.Limit;
-            var offset = categoryQuery.Offset;
-            return Ok(new Response<CategoryAndMoreDto>(categoryAndMoreDtos, total, limit, offset));
-        }
-        catch (Exception)
-        {
-            return BadRequest();
-        }
+        var categories = await _categoriesRepository.GetCategories(categoriesQuery);
+        var categoriesAndMoreDtos = categories.Select(x => x.ConvertToCategoryAndMoreDto()).ToList();
+        var total = categoriesAndMoreDtos.Count;
+        var limit = categoriesQuery.Limit;
+        var offset = categoriesQuery.Offset;
+        return Ok(new Response<CategoryAndMoreDto>(categoriesAndMoreDtos, total, limit, offset));
     }
 
     // GET BY ID
     [HttpGet]
     [SwaggerOperation(Summary = "Lấy Category theo ID")]
-    [Route("{categoryId:guid}")]
-    public async Task<ActionResult<CategoryAndMoreDto>> GetCategory([FromRoute] Guid categoryId,
-        [FromQuery] List<CategoryInclude> includes)
+    [Route("{categoriesId:guid}")]
+    public async Task<ActionResult<CategoryAndMoreDto>> GetCategory([FromRoute] Guid categoriesId)
     {
         try
         {
-            var category = await _categoryRepository.GetCategoryById(categoryId.ToString(), includes);
-            if (category == null) return NotFound();
-            return Ok(category.ConvertToCategoryAndMoreDto());
+            var categories = await _categoriesRepository.GetCategoryById(categoriesId.ToString());
+            if (categories == null) return NotFound();
+            return Ok(categories.ConvertToCategoryAndMoreDto());
         }
         catch (Exception)
         {
@@ -65,13 +55,12 @@ public class CategoryController : ControllerBase
     // POST
     [SwaggerOperation(Summary = "Tạo Category")]
     [HttpPost]
-    [Categoryize]
     public async Task<ActionResult> CreateCategory([FromBody] CreateCategoryDto createCategoryDto)
     {
         try
         {
-            var category = createCategoryDto.ConvertToCategory();
-            var result = await _categoryRepository.CreateCategory(category);
+            var categories = createCategoryDto.ConvertToCategory();
+            var result = await _categoriesRepository.CreateCategory(categories);
             return result switch
             {
                 HttpStatusCode.OK => Ok(new OkResponse()),
@@ -92,12 +81,11 @@ public class CategoryController : ControllerBase
     // PUT
     [SwaggerOperation(Summary = "Cập nhật Category")]
     [HttpPut]
-    [Categoryize]
     public async Task<ActionResult> UpdateCategory([FromBody] UpdateCategoryDto updateCategoryDto)
     {
         try
         {
-            var result = await _categoryRepository.UpdateCategory(updateCategoryDto);
+            var result = await _categoriesRepository.UpdateCategory(updateCategoryDto);
             return result switch
             {
                 HttpStatusCode.OK => Ok(new OkResponse()),
@@ -111,7 +99,8 @@ public class CategoryController : ControllerBase
         }
         catch (Exception)
         {
-            if (!await _categoryRepository.CategoryExistsAsync(updateCategoryDto.CategoryId.ToString()!)) return NotFound();
+            if (!await _categoriesRepository.CategoryExistsAsync(updateCategoryDto.CategoryId.ToString()!))
+                return NotFound();
 
             return BadRequest();
         }
@@ -121,12 +110,11 @@ public class CategoryController : ControllerBase
     // DELETE
     [SwaggerOperation(Summary = "Xóa Category")]
     [HttpDelete]
-    [Categoryize]
-    public async Task<ActionResult> DeleteCategory([FromBody] List<Guid> categoryIds)
+    public async Task<ActionResult> DeleteCategory([FromBody] List<Guid> categoriesIds)
     {
         try
         {
-            var result = await _categoryRepository.DeleteCategory(categoryIds);
+            var result = await _categoriesRepository.DeleteCategory(categoriesIds);
             return result switch
             {
                 HttpStatusCode.OK => Ok(new OkResponse()),

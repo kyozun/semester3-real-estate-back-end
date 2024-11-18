@@ -15,6 +15,8 @@ public class CreatePropertyDto
     [Required] public int Bedroom { get; set; }
     [Required] public int Bathroom { get; set; }
 
+    [Required] public List<IFormFile> Images { get; set; }
+
     // ID
     [Required] public Guid DirectionId { get; set; }
     [Required] public Guid CategoryId { get; set; }

@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using semester3_real_estate_back_end.DTO.User;
 using semester3_real_estate_back_end.Interfaces;
 using semester3_real_estate_back_end.Models;
+using semester3_real_estate_back_end.Wrapper;
 using semester4.Interfaces;
-using semester4.Wrapper;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace semester3_real_estate_back_end.Controllers;
@@ -14,18 +14,16 @@ namespace semester3_real_estate_back_end.Controllers;
 [Route("api/auth")]
 public class AuthenticationController : ControllerBase
 {
-    private readonly IBlobStorageService _blobStorageService;
     private readonly SignInManager<User> _signInManager;
     private readonly ITokenService _tokenService;
     private readonly UserManager<User> _userManager;
 
     public AuthenticationController(UserManager<User> userManager, ITokenService tokenService,
-        SignInManager<User> signInManager, IBlobStorageService blobStorageService)
+        SignInManager<User> signInManager)
     {
         _userManager = userManager;
         _tokenService = tokenService;
         _signInManager = signInManager;
-        _blobStorageService = blobStorageService;
     }
 
 
@@ -106,16 +104,16 @@ public class AuthenticationController : ControllerBase
     // Refresh token (POST)
 
     // Create Avatar
-    [SwaggerOperation(Summary = "Upload avatar")]
-    [HttpPost]
-    [Route("avatar")]
-    public async Task<IActionResult> CreateAvatar(IFormFile? file)
-    {
-        if (file == null || file.Length == 0) return BadRequest(new BadRequestResponse("File is empty"));
-
-        const string containerName = "avatar";
-        var result = await _blobStorageService.UploadFileAsync(file, containerName);
-
-        return Ok(new { FileUrl = result });
-    }
+    // [SwaggerOperation(Summary = "Upload avatar")]
+    // [HttpPost]
+    // [Route("avatar")]
+    // public async Task<IActionResult> CreateAvatar(IFormFile? file)
+    // {
+    //     // if (file == null || file.Length == 0) return BadRequest(new BadRequestResponse("File is empty"));
+    //
+    //     // const string containerName = "avatar";
+    //     // var result = await _blobStorageService.UploadFileAsync(file, containerName);
+    //
+    //     // return Ok(new { FileUrl = result });
+    // }
 }

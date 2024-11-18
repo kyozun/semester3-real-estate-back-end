@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace semester4.Wrapper;
+namespace semester3_real_estate_back_end.Wrapper;
 
 public class ConflictResponse
 {
