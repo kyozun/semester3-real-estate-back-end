@@ -64,6 +64,9 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+// Add Data Seed
+builder.Services.AddScoped<DataSeeder>();
+
 
 // builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
 // {
@@ -143,6 +146,8 @@ builder.Services.AddScoped<IPropertyTypeRepository, PropertyTypeRepository>();
 builder.Services.AddScoped<IDirectionRepository, DirectionRepository>();
 builder.Services.AddScoped<IJuridicalRepository, JuridicalRepository>();
 builder.Services.AddScoped<IProvinceRepository, ProvinceRepository>();
+builder.Services.AddScoped<IDistrictRepository, DistrictRepository>();
+builder.Services.AddScoped<IWardRepository, WardRepository>();
 
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IFileService, FileService>();
@@ -176,6 +181,14 @@ app.UseSession();
 // Add core
 app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
+
+// Run data seeder
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<DataSeeder>();
+    var filePath = "semester3_data.xlsx";
+    await seeder.SeedFromExcel(filePath);
+}
 
 // Setup static file from wwwroot folder
 app.UseStaticFiles();

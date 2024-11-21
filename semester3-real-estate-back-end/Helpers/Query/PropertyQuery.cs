@@ -12,7 +12,7 @@ public class PropertyQuery
     public List<Guid>? PropertyTypeIds { get; set; }
     public List<Guid>? CategoryIds { get; set; }
     public List<Guid>? JuridicalIds { get; set; }
-    public Guid? WardId { get; set; }
+    public int? WardId { get; set; }
 
     public string? Title { get; set; }
     public string? Description { get; set; }
@@ -24,7 +24,7 @@ public class PropertyQuery
 
     public string? Furniture { get; set; }
     
-    [RegularExpression(@"^\d+-\d+$", ErrorMessage = "Invalid price range format")]
+    [RegularExpression(@"^\d+-\d+$", ErrorMessage = "Invalid area range format")]
     public string? Area { get; set; }
     public int? Floor { get; set; }
     public int? Bedroom { get; set; }

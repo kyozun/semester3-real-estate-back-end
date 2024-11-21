@@ -21,9 +21,9 @@ public class DataContext : IdentityDbContext<User, Role, string>
     public DbSet<Ward> Ward { get; set; }
 
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
-        new DbInitializer(modelBuilder).Seed();
-    }
+    // protected override void OnModelCreating(ModelBuilder modelBuilder)
+    // {
+    //     base.OnModelCreating(modelBuilder);
+    //     new DbInitializer(modelBuilder).Seed();
+    // }
 }

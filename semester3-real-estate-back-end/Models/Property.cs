@@ -12,7 +12,7 @@ public class Property
     public int Bedroom { get; set; }
     public int Bathroom { get; set; }
     public int ViewCount { get; set; }
-    public string coverImage { get; set; }
+    public string CoverImage { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;

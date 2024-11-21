@@ -28,6 +28,12 @@ public class WardRepository : IWardRepository
         if (!string.IsNullOrWhiteSpace(wardQuery.Name))
             wards = wards.Where(x => x.Name.ToLower().Contains(wardQuery.Name.ToLower()));
 
+        // Tìm theo DistrictId
+        if (wardQuery.DistrictId != null)
+        {
+            wards = wards.Where(x => x.DistrictId == wardQuery.DistrictId);
+        }
+
         // Lấy thêm Include
         wards = wards.Include(x => x.Properties);
 

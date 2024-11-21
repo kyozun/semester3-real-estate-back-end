@@ -35,7 +35,7 @@ public static class PropertyMapper
             Price = property.Price,
             Bedroom = property.Bedroom,
             Floor = property.Floor,
-            CoverImage = property.coverImage,
+            CoverImage = property.CoverImage,
             PropertyImages = property.PropertyImages.Select(x => x.ConvertToPropertyImageDto()).ToList(),
             Category = property.Category.ConvertToCategoryDto(),
             Direction = property.Direction.ConvertToDirectionDto(),

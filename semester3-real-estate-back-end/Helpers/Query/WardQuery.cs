@@ -5,9 +5,9 @@ namespace semester3_real_estate_back_end.Helpers.Query;
 
 public class WardQuery
 {
-    public Guid? WardId { get; set; }
+    public int? WardId { get; set; }
 
-    public Guid? DistrictId { get; set; }
+    public int? DistrictId { get; set; }
     public string? Name { get; set; }
 
     [DefaultValue("10")] public int Limit { get; set; }

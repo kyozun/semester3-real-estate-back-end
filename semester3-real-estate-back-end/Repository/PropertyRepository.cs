@@ -109,10 +109,10 @@ public class PropertyRepository : IPropertyRepository
         }
 
         // Tìm theo WardId
-        if (propertyQuery.WardId != null && propertyQuery.WardId != Guid.Empty)
+        if (propertyQuery.WardId != null)
         {
             properties = properties.Where(x =>
-                propertyQuery.JuridicalIds!.Select(y => y.ToString()).Contains(x.JuridicalId));
+                propertyQuery.WardId == x.WardId);
         }
 
 
@@ -161,7 +161,7 @@ public class PropertyRepository : IPropertyRepository
             if (createPropertyDto.coverImage.Length > 0)
             {
                 var imageUrl = await SaveImageAsync(createPropertyDto.coverImage);
-                property.coverImage = imageUrl;
+                property.CoverImage = imageUrl;
             }
 
 

@@ -28,6 +28,12 @@ public class DistrictRepository : IDistrictRepository
         if (!string.IsNullOrWhiteSpace(districtQuery.Name))
             districts = districts.Where(x => x.Name.ToLower().Contains(districtQuery.Name.ToLower()));
 
+        // Tìm theo ProvinceId
+        if (districtQuery.ProvinceId != null)
+        {
+            districts = districts.Where(x => x.ProvinceId == districtQuery.ProvinceId);
+        }
+
         // Lấy thêm Include
         districts = districts.Include(x => x.Wards);
 
