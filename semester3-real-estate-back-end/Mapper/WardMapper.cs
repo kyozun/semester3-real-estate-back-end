@@ -32,7 +32,6 @@ public static class WardMapper
     {
         var ward = new Ward
         {
-            WardId = Guid.NewGuid().ToString(),
             Name = createWardDto.Name,
         };
 

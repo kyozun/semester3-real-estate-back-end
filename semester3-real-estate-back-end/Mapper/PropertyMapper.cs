@@ -35,7 +35,7 @@ public static class PropertyMapper
             Price = property.Price,
             Bedroom = property.Bedroom,
             Floor = property.Floor,
-
+            CoverImage = property.coverImage,
             PropertyImages = property.PropertyImages.Select(x => x.ConvertToPropertyImageDto()).ToList(),
             Category = property.Category.ConvertToCategoryDto(),
             Direction = property.Direction.ConvertToDirectionDto(),
@@ -43,7 +43,6 @@ public static class PropertyMapper
             PropertyType = property.PropertyType.ConvertToPropertyTypeDto(),
             Ward = property.Ward.ConvertToWardDto(),
             User = property.User.ConvertToUserDto(),
-            
         };
 
         return dto;
@@ -63,14 +62,11 @@ public static class PropertyMapper
             Price = createPropertyDto.Price,
             Bedroom = createPropertyDto.Bedroom,
             Floor = createPropertyDto.Floor,
-            
             JuridicalId = createPropertyDto.JuridicalId.ToString(),
-            WardId = createPropertyDto.WardId.ToString(),
+            WardId = createPropertyDto.WardId,
             PropertyTypeId = createPropertyDto.PropertyTypeId.ToString(),
             CategoryId = createPropertyDto.CategoryId.ToString(),
             DirectionId = createPropertyDto.DirectionId.ToString(),
-            
-            
         };
     }
 }

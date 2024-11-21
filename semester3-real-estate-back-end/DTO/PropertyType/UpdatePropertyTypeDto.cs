@@ -1,6 +1,9 @@
-﻿namespace semester3_real_estate_back_end.DTO.PropertyType;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace semester3_real_estate_back_end.DTO.PropertyType;
 
 public class UpdatePropertyTypeDto
 {
-    public required string Name { get; set; }
+    [Required] public Guid? PropertyTypeId { get; set; }
+    public string Name { get; set; }
 }

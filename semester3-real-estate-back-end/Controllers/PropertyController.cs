@@ -60,13 +60,13 @@ public class PropertyController : ControllerBase
     [SwaggerOperation(Summary = "Tạo Property")]
     [HttpPost]
     [Authorize]
-    public async Task<ActionResult> CreateProperty([FromForm] CreatePropertyDto createPropertyDto,
-        [FromForm, Required] List<IFormFile> images)
+    public async Task<ActionResult> CreateProperty([FromForm] CreatePropertyDto createPropertyDto
+        )
     {
         try
         {
-            var property = createPropertyDto.ConvertToProperty();
-            var result = await _propertyRepository.CreateProperty(property, images);
+            // var property = createPropertyDto.ConvertToProperty();
+            var result = await _propertyRepository.CreateProperty(createPropertyDto);
             return result switch
             {
                 HttpStatusCode.OK => Ok(new OkResponse()),

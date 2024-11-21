@@ -2,11 +2,14 @@
 
 public class District
 {
-    public string DistrictId { get; set; }
+    public int DistrictId { get; set; }
     public string Name { get; set; }
+    
+    public DateTime UpdatedAt { get; set; } = DateTime.Now;
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     // FK
-    public string ProvinceId { get; set; }
+    public int ProvinceId { get; set; }
 
     //Navigation Property
     public Province Province { get; set; }

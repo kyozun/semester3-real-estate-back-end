@@ -12,6 +12,7 @@ public class Property
     public int Bedroom { get; set; }
     public int Bathroom { get; set; }
     public int ViewCount { get; set; }
+    public string coverImage { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
@@ -20,9 +21,9 @@ public class Property
     public string DirectionId { get; set; }
     public string CategoryId { get; set; }
     public string PropertyTypeId { get; set; }
-    public string WardId { get; set; }
     public string JuridicalId { get; set; }
     public string UserId { get; set; }
+    public int WardId { get; set; }
 
     // Navigation Property
     public List<PropertyImage> PropertyImages { get; set; }

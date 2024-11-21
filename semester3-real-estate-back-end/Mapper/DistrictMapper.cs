@@ -32,7 +32,6 @@ public static class DistrictMapper
     {
         return new District
         {
-            DistrictId = Guid.NewGuid().ToString(),
             Name = createDistrictDto.Name,
         };
     }

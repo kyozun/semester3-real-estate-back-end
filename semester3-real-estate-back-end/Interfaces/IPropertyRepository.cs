@@ -9,7 +9,7 @@ public interface IPropertyRepository
 {
     Task<IEnumerable<Property>> GetProperties(PropertyQuery propertyQuery);
     Task<Property?> GetPropertyById(string propertyId);
-    Task<HttpStatusCode> CreateProperty(Property property, List<IFormFile> images);
+    Task<HttpStatusCode> CreateProperty(CreatePropertyDto createPropertyDto);
     Task<HttpStatusCode> UpdateProperty(UpdatePropertyDto updatePropertyDto);
     Task<HttpStatusCode> DeleteProperty(List<Guid> propertyIds);
 

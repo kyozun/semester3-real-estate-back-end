@@ -20,13 +20,71 @@ public class DbInitializer
             new Category
             {
                 CategoryId = "ffe56d39-3939-4c5c-ade9-8f147dca9592",
-                Name = "Category 1",
+                Name = "House",
+                CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
             },
             new Category
             {
                 CategoryId = "ffe56d39-3939-4c5c-ade9-8f147dca9593",
-                Name = "Category 2",
+                Name = "Townhouse",
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+            },
+            new Category
+            {
+                CategoryId = "ffe56d39-3939-4c5c-ade9-8f147dca9594",
+                Name = "Apartment & Unit",
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+            },
+            new Category
+            {
+                CategoryId = "ffe56d39-3939-4c5c-ade9-8f147dca9595",
+                Name = "Shophouse",
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+            },
+            new Category
+            {
+                CategoryId = "ffe56d39-3939-4c5c-ade9-8f147dca9596",
+                Name = "Villa",
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+            },
+            new Category
+            {
+                CategoryId = "ffe56d39-3939-4c5c-ade9-8f147dca9597",
+                Name = "Retirement Living",
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+            },
+            new Category
+            {
+                CategoryId = "ffe56d39-3939-4c5c-ade9-8f147dca9598",
+                Name = "Land",
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+            },
+            new Category
+            {
+                CategoryId = "ffe56d39-3939-4c5c-ade9-8f147dca9599",
+                Name = "Warehouses",
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+            },
+            new Category
+            {
+                CategoryId = "ffe56d39-3939-4c5c-ade9-8f147dca9600",
+                Name = "Residential",
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+            },
+            new Category
+            {
+                CategoryId = "ffe56d39-3939-4c5c-ade9-8f147dca9601",
+                Name = "Mobile home",
+                CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
             }
         );
@@ -35,13 +93,38 @@ public class DbInitializer
         _modelBuilder.Entity<Direction>().HasData(
             new Direction
             {
-                DirectionId = "ffe56d39-3939-4c5c-ade9-8f147dca9593",
+                DirectionId = "ffe56d39-3939-4c5c-ade9-8f147dca9594",
                 Name = "North",
             },
             new Direction
             {
-                DirectionId = "ffe56d39-3939-4c5c-ade9-8f147dca9594",
+                DirectionId = "ffe56d39-3939-4c5c-ade9-8f147dca9595",
+                Name = "Northeast",
+            },
+            new Direction
+            {
+                DirectionId = "ffe56d39-3939-4c5c-ade9-8f147dca9596",
+                Name = "East",
+            },
+            new Direction
+            {
+                DirectionId = "ffe56d39-3939-4c5c-ade9-8f147dca9597",
+                Name = "Southeast",
+            },
+            new Direction
+            {
+                DirectionId = "ffe56d39-3939-4c5c-ade9-8f147dca9598",
                 Name = "South",
+            },
+            new Direction
+            {
+                DirectionId = "ffe56d39-3939-4c5c-ade9-8f147dca9599",
+                Name = "West",
+            },
+            new Direction
+            {
+                DirectionId = "ffe56d39-3939-4c5c-ade9-8f147dca9600",
+                Name = "Northwest",
             }
         );
 
@@ -50,7 +133,7 @@ public class DbInitializer
             new Juridical
             {
                 JuridicalId = "ffe56d39-3939-4c5c-ade9-8f147dca9594",
-                Name = "Direction 1",
+                Name = "Certificate of Land Use Rights, House Ownership, and Other Assets Attached to Land",
             }
         );
 
@@ -59,7 +142,12 @@ public class DbInitializer
             new PropertyType
             {
                 PropertyTypeId = "ffe56d39-3939-4c5c-ade9-8f147dca9595",
-                Name = "PropertyType 1",
+                Name = "For Sell",
+            },
+            new PropertyType
+            {
+                PropertyTypeId = "ffe56d39-3939-4c5c-ade9-8f147dca9596",
+                Name = "For Rent",
             }
         );
 
@@ -68,52 +156,29 @@ public class DbInitializer
         _modelBuilder.Entity<Province>().HasData(
             new Province
             {
-                ProvinceId = "ffe56d39-3939-4c5c-ade9-8f147dca9596",
+                ProvinceId = 1,
                 Name = "Province 1",
-            },
-            new Province
-            {
-                ProvinceId = "ffe56d39-3939-4c5c-ade9-8f147dca9597",
-                Name = "Province 2",
             }
         );
-
+        
         // District
         _modelBuilder.Entity<District>().HasData(
             new District
             {
-                DistrictId = "ffe56d39-3939-4c5c-ade9-8f147dca9596",
+                DistrictId = 1,
                 Name = "District 1",
-                ProvinceId = "ffe56d39-3939-4c5c-ade9-8f147dca9596"
-            },
-            new District
-            {
-                DistrictId = "ffe56d39-3939-4c5c-ade9-8f147dca9597",
-                Name = "District 2",
-                ProvinceId = "ffe56d39-3939-4c5c-ade9-8f147dca9596"
-            },
-            new District
-            {
-                DistrictId = "ffe56d39-3939-4c5c-ade9-8f147dca9598",
-                Name = "District 3",
-                ProvinceId = "ffe56d39-3939-4c5c-ade9-8f147dca9597"
+                ProvinceId = 1
             }
         );
-
-
+        
+        
         // Ward
         _modelBuilder.Entity<Ward>().HasData(
             new Ward
             {
-                WardId = "ffe56d39-3939-4c5c-ade9-8f147dca9596",
+                WardId = 1,
                 Name = "Ward 1",
-                DistrictId = "ffe56d39-3939-4c5c-ade9-8f147dca9596"
-            },
-            new Ward
-            {
-                WardId = "ffe56d39-3939-4c5c-ade9-8f147dca9597",
-                Name = "Ward 2",
-                DistrictId = "ffe56d39-3939-4c5c-ade9-8f147dca9597"
+                DistrictId = 1
             }
         );
 
@@ -130,39 +195,17 @@ public class DbInitializer
                 Floor = 1,
                 Bathroom = 1,
                 Bedroom = 1,
-
-                CategoryId = "ffe56d39-3939-4c5c-ade9-8f147dca9592",
-                DirectionId = "ffe56d39-3939-4c5c-ade9-8f147dca9593",
-                JuridicalId = "ffe56d39-3939-4c5c-ade9-8f147dca9594",
-                PropertyTypeId = "ffe56d39-3939-4c5c-ade9-8f147dca9595",
-                WardId = "ffe56d39-3939-4c5c-ade9-8f147dca9596",
-                UserId = "70acc54a-44e0-4d31-8b07-52b5b82e9e55",
-
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now
-            },
-            new Property
-            {
-                PropertyId = "ffe56d39-3939-4c5c-ade9-8f147dca9582",
-                Description = "Description",
-                Title = "Property title 2 ",
-                Address = "Address 2",
-                Price = 20.00,
-                Area = 10.00,
-                Floor = 1,
-                Bathroom = 1,
-                Bedroom = 1,
-
+                coverImage = "/images/bfafb74b-0dcd-4187-9141-670f03ba97aa_onepunchman.PNG",
                 CategoryId = "ffe56d39-3939-4c5c-ade9-8f147dca9592",
                 DirectionId = "ffe56d39-3939-4c5c-ade9-8f147dca9594",
                 JuridicalId = "ffe56d39-3939-4c5c-ade9-8f147dca9594",
                 PropertyTypeId = "ffe56d39-3939-4c5c-ade9-8f147dca9595",
-                WardId = "ffe56d39-3939-4c5c-ade9-8f147dca9597",
+                WardId = 1,
                 UserId = "70acc54a-44e0-4d31-8b07-52b5b82e9e55",
-
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now
             }
+           
         );
 
         // Role

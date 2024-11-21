@@ -4,7 +4,7 @@ namespace semester3_real_estate_back_end.DTO.Juridical;
 
 public class UpdateJuridicalDto
 {
-    [Required] public Guid? ProvinceId { get; set; }
+    [Required] public Guid? JuridicalId { get; set; }
 
     public string? Name { get; set; }
 }

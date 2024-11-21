@@ -6,6 +6,7 @@ using semester3_real_estate_back_end.Data;
 using semester3_real_estate_back_end.DTO.Property;
 using semester3_real_estate_back_end.Helpers.Query;
 using semester3_real_estate_back_end.Interfaces;
+using semester3_real_estate_back_end.Mapper;
 using semester3_real_estate_back_end.Models;
 
 namespace semester3_real_estate_back_end.Repository;
@@ -136,8 +137,10 @@ public class PropertyRepository : IPropertyRepository
         return property;
     }
 
-    public async Task<HttpStatusCode> CreateProperty(Property property, List<IFormFile> images)
+    public async Task<HttpStatusCode> CreateProperty(CreatePropertyDto createPropertyDto)
     {
+        var property = createPropertyDto.ConvertToProperty();
+
         var userId = _httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         property.UserId = userId;
 
@@ -153,12 +156,22 @@ public class PropertyRepository : IPropertyRepository
                 // Nếu đã tồn tại, trả về lỗi Conflict (409)
                 return HttpStatusCode.Conflict;
 
+
+            // Lưu ảnh bìa
+            if (createPropertyDto.coverImage.Length > 0)
+            {
+                var imageUrl = await SaveImageAsync(createPropertyDto.coverImage);
+                property.coverImage = imageUrl;
+            }
+
+
             // Lưu vào database
             await _context.AddAsync(property);
             await _context.SaveChangesAsync();
 
 
-            foreach (var image in images)
+            // Lưu ảnh property
+            foreach (var image in createPropertyDto.propertyImages)
             {
                 if (image.Length > 0)
                 {
@@ -238,7 +251,7 @@ public class PropertyRepository : IPropertyRepository
                         {
                             PropertyImageId = Guid.NewGuid().ToString(),
                             PropertyId = existingProperty.PropertyId,
-                            Description = "Description", 
+                            Description = "Description",
                             ImageUrl = imageUrl
                         };
 

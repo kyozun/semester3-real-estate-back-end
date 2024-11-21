@@ -6,7 +6,7 @@ namespace semester3_real_estate_back_end.DTO.District;
 
 public class DistrictAndMoreDto
 {
-    public string DistrictId { get; set; } = string.Empty;
+    public int DistrictId { get; set; }
     public string Name { get; set; } = string.Empty;
 
     public List<WardDto> Wards { get; set; }

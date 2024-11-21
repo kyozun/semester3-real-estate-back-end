@@ -2,8 +2,12 @@
 
 public class Province
 {
-    public string ProvinceId { get; set; }
+    public int ProvinceId { get; set; }
     public string Name { get; set; }
+    
+    public DateTime UpdatedAt { get; set; } = DateTime.Now;
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+
 
     // Navigation Property
     public List<District> Districts { get; set; }

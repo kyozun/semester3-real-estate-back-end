@@ -4,7 +4,7 @@ namespace semester4.DTO.Genre;
 
 public class UpdateDistrictDto
 {
-    [Required] public Guid? GenreId { get; set; }
+    [Required] public int DistrictId { get; set; }
 
     public string? Name { get; set; }
 }

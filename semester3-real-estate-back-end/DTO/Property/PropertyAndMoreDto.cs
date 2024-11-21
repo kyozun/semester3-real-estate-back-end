@@ -16,13 +16,13 @@ public class PropertyAndMoreDto
     public string CoverImage { get; set; }
     public string Address { get; set; }
     public double Price { get; set; }
+    
     public string Furniture { get; set; }
     public double Area { get; set; }
     public int Floor { get; set; }
     public int Bedroom { get; set; }
     public int Bathroom { get; set; }
     public int ViewCount { get; set; }
-
 
     public List<PropertyImageDto> PropertyImages { get; set; }
     public CategoryDto Category { get; set; }

@@ -2,11 +2,14 @@
 
 public class Ward
 {
-    public string WardId { get; set; }
-    public string Name { get; set; }
+    public int WardId { get; set; }
+    public string Name { get; set; }            
+    
+    public DateTime UpdatedAt { get; set; } = DateTime.Now;
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     // FK
-    public string DistrictId { get; set; }
+    public int DistrictId { get; set; }
 
     // Navigation Property
     public District District { get; set; }

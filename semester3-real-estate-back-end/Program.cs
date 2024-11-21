@@ -53,11 +53,10 @@ builder.Services.AddSwaggerGen(option =>
 });
 
 // Add Cors
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(MyAllowSpecificOrigins,
-        builder => { builder.WithOrigins("*"); });
+    options.AddPolicy("ApiCorsPolicy",
+        builder => { builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader(); });
 });
 
 builder.Services.AddDbContext<DataContext>(options =>
@@ -140,17 +139,11 @@ builder.Services.AddAuthorization(options =>
 // Repository
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
-// builder.Services.AddScoped<IChapterRepository, ChapterRepository>();
-// builder.Services.AddScoped<IGenreRepository, GenreRepository>();
-// builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
-// builder.Services.AddScoped<IMangaGenreRepository, MangaGenreRepository>();
-// builder.Services.AddScoped<IMangaAuthorRepository, MangaAuthorRepository>();
-// builder.Services.AddScoped<ICommentRepository, CommentRepository>();
-// builder.Services.AddScoped<IChapterCommentRepository, ChapterCommentRepository>();
-// builder.Services.AddScoped<ICustomListRepository, CustomListRepository>();
-// builder.Services.AddScoped<IRatingRepository, RatingRepository>();
-// builder.Services.AddScoped<IUserMangaRepository, UserMangaRepository>();
-// builder.Services.AddScoped<ICoverArtRepository, CoverArtRepository>();
+builder.Services.AddScoped<IPropertyTypeRepository, PropertyTypeRepository>();
+builder.Services.AddScoped<IDirectionRepository, DirectionRepository>();
+builder.Services.AddScoped<IJuridicalRepository, JuridicalRepository>();
+builder.Services.AddScoped<IProvinceRepository, ProvinceRepository>();
+
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IFileService, FileService>();
 
@@ -177,11 +170,11 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-//
+// Add session
 app.UseSession();
 
-// Add Cors
-app.UseCors(MyAllowSpecificOrigins);
+// Add core
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 
 // Setup static file from wwwroot folder
