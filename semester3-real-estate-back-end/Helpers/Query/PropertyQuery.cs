@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using semester3_real_estate_back_end.Helpers.Enums;
 using semester4.Helpers.Enums.Include;
 
 namespace semester3_real_estate_back_end.Helpers.Query;
@@ -14,7 +15,10 @@ public class PropertyQuery
     public List<Guid>? JuridicalIds { get; set; }
     public int? WardId { get; set; }
 
+    public PropertySortBy? SortBy { get; set; }
+
     public string? Title { get; set; }
+
     public string? Description { get; set; }
     public string? CoverImage { get; set; }
     public string? Address { get; set; }
@@ -23,9 +27,10 @@ public class PropertyQuery
     public string? Price { get; set; }
 
     public string? Furniture { get; set; }
-    
+
     [RegularExpression(@"^\d+-\d+$", ErrorMessage = "Invalid area range format")]
     public string? Area { get; set; }
+
     public int? Floor { get; set; }
     public int? Bedroom { get; set; }
     public int? Bathroom { get; set; }
@@ -33,3 +38,9 @@ public class PropertyQuery
     [DefaultValue("10")] public int Limit { get; set; }
     public int Offset { get; set; }
 }
+
+public class PropertySortBy
+{
+    public SortBy View { get; set; }
+}
+

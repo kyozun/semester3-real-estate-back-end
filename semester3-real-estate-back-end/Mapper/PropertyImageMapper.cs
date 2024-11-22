@@ -1,6 +1,5 @@
 ﻿using semester3_real_estate_back_end.DTO.PropertyImage;
 using semester3_real_estate_back_end.Models;
-using semester4.DTO.Chapter;
 
 namespace semester3_real_estate_back_end.Mapper;
 
@@ -11,6 +10,7 @@ public  static class PropertyImageMapper
     {
         return new PropertyImageDto
         {
+            PropertyImageId = propertyImage.PropertyImageId,
             ImageUrl = propertyImage.ImageUrl,
             Description = propertyImage.Description,
         };

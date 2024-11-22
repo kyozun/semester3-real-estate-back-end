@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using semester3_real_estate_back_end.Data;
 using semester3_real_estate_back_end.DTO.Property;
+using semester3_real_estate_back_end.Helpers.Enums;
 using semester3_real_estate_back_end.Helpers.Query;
 using semester3_real_estate_back_end.Interfaces;
 using semester3_real_estate_back_end.Mapper;
@@ -113,6 +114,14 @@ public class PropertyRepository : IPropertyRepository
         {
             properties = properties.Where(x =>
                 propertyQuery.WardId == x.WardId);
+        }
+
+        // Sort by View
+        if (propertyQuery.SortBy?.View != null)
+        {
+            properties = propertyQuery.SortBy.View == SortBy.Desc
+                ? properties.OrderByDescending(x => x.ViewCount)
+                : properties.OrderBy(x => x.ViewCount);
         }
 
 

@@ -2,5 +2,6 @@
 
 public class PropertyTypeDto
 {
+    public string PropertyTypeId { get; set; }
     public string Name { get; set; }
 }

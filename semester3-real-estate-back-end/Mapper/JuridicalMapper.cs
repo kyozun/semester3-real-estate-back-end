@@ -9,6 +9,7 @@ public static class JuridicalMapper
     {
         return new JuridicalDto
         {
+            JuridicalId = juridical.JuridicalId,
             Name = juridical.Name
         };
     }

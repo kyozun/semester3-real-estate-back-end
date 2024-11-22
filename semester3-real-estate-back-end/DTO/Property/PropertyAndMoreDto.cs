@@ -1,10 +1,10 @@
 ﻿using semester3_real_estate_back_end.DTO.Category;
+using semester3_real_estate_back_end.DTO.Direction;
 using semester3_real_estate_back_end.DTO.Juridical;
 using semester3_real_estate_back_end.DTO.PropertyImage;
 using semester3_real_estate_back_end.DTO.PropertyType;
 using semester3_real_estate_back_end.DTO.User;
 using semester3_real_estate_back_end.DTO.Ward;
-using semester4.DTO.Chapter;
 
 namespace semester3_real_estate_back_end.DTO.Property;
 

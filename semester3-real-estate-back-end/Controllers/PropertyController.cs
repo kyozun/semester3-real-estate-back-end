@@ -61,11 +61,10 @@ public class PropertyController : ControllerBase
     [HttpPost]
     [Authorize]
     public async Task<ActionResult> CreateProperty([FromForm] CreatePropertyDto createPropertyDto
-        )
+    )
     {
         try
         {
-            // var property = createPropertyDto.ConvertToProperty();
             var result = await _propertyRepository.CreateProperty(createPropertyDto);
             return result switch
             {
