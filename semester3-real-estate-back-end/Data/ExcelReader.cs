@@ -253,4 +253,27 @@ public class ExcelReader
 
         return entities;
     }
+    
+    public async Task<List<PropertyImage>> ImportPropertyImageFromExcel(string filePath, string workSheetName)
+    {
+        var entities = new List<PropertyImage>();
+        using var package = new ExcelPackage(new FileInfo(filePath));
+        var worksheet = package.Workbook.Worksheets[workSheetName];
+        int rows = worksheet.Dimension.Rows;
+
+        for (int row = 2; row <= rows; row++) // Skip header
+        {
+            var entity = new PropertyImage
+            {
+                PropertyImageId = worksheet.Cells[row, 1].Text,
+                ImageUrl = worksheet.Cells[row, 2].Text,
+                PropertyId = worksheet.Cells[row, 3].Text,
+                Description = worksheet.Cells[row, 4].Text,
+               
+            };
+            entities.Add(entity);
+        }
+
+        return entities;
+    }
 }

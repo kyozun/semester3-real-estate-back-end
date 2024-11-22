@@ -27,6 +27,7 @@ public class DataSeeder
         await SeedRole(filePath, "AspNetRoles");
         await SeedUserRole(filePath, "AspNetUserRoles");
         await SeedProperty(filePath, "Property");
+        await SeedPropertyImage(filePath, "PropertyImage");
     }
 
     private async Task SeedDirection(string filePath, string entityName)
@@ -39,8 +40,6 @@ public class DataSeeder
             // Delete old table
             await _dbContext.Database.ExecuteSqlRawAsync($"DELETE  FROM  {entityName}");
 
-            // Reset primary key 
-            await _dbContext.Database.ExecuteSqlRawAsync($"DELETE FROM sqlite_sequence WHERE name = '{entityName}'");
 
             // Read data from Excel
             var reader = new ExcelReader();
@@ -49,11 +48,11 @@ public class DataSeeder
             // Insert new data
             _dbContext.Direction.AddRange(entities);
             await _dbContext.SaveChangesAsync();
-            Console.WriteLine("Seed OK");
+            Console.WriteLine("Seed Direction = OK");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Seed Error: {ex.Message}");
+            Console.WriteLine($"Seed Direction Error: {ex.Message}");
         }
     }
     private async Task SeedCategory(string filePath, string entityName)
@@ -66,8 +65,6 @@ public class DataSeeder
             // Delete old table
             await _dbContext.Database.ExecuteSqlRawAsync($"DELETE  FROM  {entityName}");
 
-            // Reset primary key 
-            await _dbContext.Database.ExecuteSqlRawAsync($"DELETE FROM sqlite_sequence WHERE name = '{entityName}'");
 
             // Read data from Excel
             var reader = new ExcelReader();
@@ -76,11 +73,11 @@ public class DataSeeder
             // Insert new data
             _dbContext.Category.AddRange(entities);
             await _dbContext.SaveChangesAsync();
-            Console.WriteLine("Seed OK");
+            Console.WriteLine("Seed Category = OK");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Seed Error: {ex.Message}");
+            Console.WriteLine($"Seed Category Error: {ex.Message}");
         }
     }
     
@@ -94,8 +91,6 @@ public class DataSeeder
             // Delete old table
             await _dbContext.Database.ExecuteSqlRawAsync($"DELETE  FROM  {entityName}");
 
-            // Reset primary key 
-            await _dbContext.Database.ExecuteSqlRawAsync($"DELETE FROM sqlite_sequence WHERE name = '{entityName}'");
 
             // Read data from Excel
             var reader = new ExcelReader();
@@ -104,11 +99,11 @@ public class DataSeeder
             // Insert new data
             _dbContext.Province.AddRange(entities);
             await _dbContext.SaveChangesAsync();
-            Console.WriteLine("Seed OK");
+            Console.WriteLine("Seed Province = OK");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Seed Error: {ex.Message}");
+            Console.WriteLine($"Seed Province Error: {ex.Message}");
         }
     }
     
@@ -122,8 +117,6 @@ public class DataSeeder
             // Delete old table
             await _dbContext.Database.ExecuteSqlRawAsync($"DELETE  FROM  {entityName}");
 
-            // Reset primary key 
-            await _dbContext.Database.ExecuteSqlRawAsync($"DELETE FROM sqlite_sequence WHERE name = '{entityName}'");
 
             // Read data from Excel
             var reader = new ExcelReader();
@@ -132,11 +125,11 @@ public class DataSeeder
             // Insert new data
             _dbContext.District.AddRange(entities);
             await _dbContext.SaveChangesAsync();
-            Console.WriteLine("Seed OK");
+            Console.WriteLine("Seed District = OK");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Seed Error: {ex.Message}");
+            Console.WriteLine($"Seed District Error: {ex.Message}");
         }
     }
     
@@ -150,8 +143,6 @@ public class DataSeeder
             // Delete old table
             await _dbContext.Database.ExecuteSqlRawAsync($"DELETE  FROM  {entityName}");
 
-            // Reset primary key 
-            await _dbContext.Database.ExecuteSqlRawAsync($"DELETE FROM sqlite_sequence WHERE name = '{entityName}'");
 
             // Read data from Excel
             var reader = new ExcelReader();
@@ -160,11 +151,11 @@ public class DataSeeder
             // Insert new data
             _dbContext.Ward.AddRange(entities);
             await _dbContext.SaveChangesAsync();
-            Console.WriteLine("Seed OK");
+            Console.WriteLine("Seed Ward = OK");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Seed Error: {ex.Message}");
+            Console.WriteLine($"Seed Ward Error: {ex.Message}");
         }
     }
     
@@ -188,11 +179,11 @@ public class DataSeeder
             // Insert new data
             _dbContext.Juridical.AddRange(entities);
             await _dbContext.SaveChangesAsync();
-            Console.WriteLine("Seed OK");
+            Console.WriteLine("Seed Juridical = OK");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Seed Error: {ex.Message}");
+            Console.WriteLine($"Seed Juridical Error: {ex.Message}");
         }
     }
     
@@ -213,11 +204,11 @@ public class DataSeeder
             // Insert new data
             _dbContext.Users.AddRange(entities);
             await _dbContext.SaveChangesAsync();
-            Console.WriteLine("Seed OK");
+            Console.WriteLine("Seed User = OK");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Seed Error: {ex.Message}");
+            Console.WriteLine($"Seed User Error: {ex.Message}");
         }
     }
     
@@ -238,11 +229,11 @@ public class DataSeeder
             // Insert new data
             _dbContext.Roles.AddRange(entities);
             await _dbContext.SaveChangesAsync();
-            Console.WriteLine("Seed OK");
+            Console.WriteLine("Seed Role = OK");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Seed Error: {ex.Message}");
+            Console.WriteLine($"Seed Role Error: {ex.Message}");
         }
     }
     
@@ -263,11 +254,11 @@ public class DataSeeder
             // Insert new data
             _dbContext.UserRoles.AddRange(entities);
             await _dbContext.SaveChangesAsync();
-            Console.WriteLine("Seed OK");
+            Console.WriteLine("Seed User Role = OK");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Seed Error: {ex.Message}");
+            Console.WriteLine($"Seed User Role Error: {ex.Message}");
         }
     }
     
@@ -291,11 +282,11 @@ public class DataSeeder
             // Insert new data
             _dbContext.PropertyType.AddRange(entities);
             await _dbContext.SaveChangesAsync();
-            Console.WriteLine("Seed OK");
+            Console.WriteLine("Seed Property Type = OK");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Seed Error: {ex.Message}");
+            Console.WriteLine($"Seed Property Type Error: {ex.Message}");
         }
     }
     
@@ -319,11 +310,37 @@ public class DataSeeder
             // Insert new data
             _dbContext.Property.AddRange(entities);
             await _dbContext.SaveChangesAsync();
-            Console.WriteLine("Seed OK");
+            Console.WriteLine("Seed Property = OK");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Seed Error: {ex.Message}");
+            Console.WriteLine($"Seed Property Error: {ex.Message}");
+        }
+    }
+    
+    private async Task SeedPropertyImage(string filePath, string entityName)
+    {
+        if (!File.Exists(filePath))
+            throw new FileNotFoundException($"Excel file not found: {filePath}");
+
+        try
+        {
+            // Delete old table
+            await _dbContext.Database.ExecuteSqlRawAsync($"DELETE  FROM  {entityName}");
+
+
+            // Read data from Excel
+            var reader = new ExcelReader();
+            var entities = await reader.ImportPropertyImageFromExcel(filePath, entityName);
+
+            // Insert new data
+            _dbContext.PropertyImage.AddRange(entities);
+            await _dbContext.SaveChangesAsync();
+            Console.WriteLine("Seed Property Image = OK");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Seed Property Image Error: {ex.Message}");
         }
     }
     
