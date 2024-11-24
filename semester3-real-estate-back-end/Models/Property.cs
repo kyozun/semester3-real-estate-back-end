@@ -11,10 +11,12 @@ public class Property
     public int Floor { get; set; }
     public int Bedroom { get; set; }
     public int Bathroom { get; set; }
-    public int ViewCount { get; set; }
+    public int ViewCount { get; set; } = 1;
     public string CoverImage { get; set; }
 
     public bool IsDraft { get; set; } = false;
+    
+    public DateTime ExpiryDate {get; set;}
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;

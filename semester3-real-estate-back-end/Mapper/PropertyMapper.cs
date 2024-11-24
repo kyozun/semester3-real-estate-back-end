@@ -43,7 +43,9 @@ public static class PropertyMapper
             PropertyType = property.PropertyType.ConvertToPropertyTypeDto(),
             Ward = property.Ward.ConvertToWardDto(),
             User = property.User.ConvertToUserDto(),
+            IsExpiry = (property.ExpiryDate < DateTime.Now)
         };
+
 
         return dto;
     }

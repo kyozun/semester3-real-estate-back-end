@@ -17,6 +17,8 @@ public class PropertyAndMoreDto
     public string Address { get; set; }
     public double Price { get; set; }
     
+    public bool IsExpiry { get; set; }
+    
     public string Furniture { get; set; }
     public double Area { get; set; }
     public int Floor { get; set; }

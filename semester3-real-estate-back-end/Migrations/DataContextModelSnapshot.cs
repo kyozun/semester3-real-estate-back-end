@@ -242,6 +242,9 @@ namespace semester3_real_estate_back_end.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Floor")
                         .HasColumnType("INTEGER");
 

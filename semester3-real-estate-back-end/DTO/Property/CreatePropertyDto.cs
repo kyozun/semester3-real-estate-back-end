@@ -8,12 +8,15 @@ public class CreatePropertyDto
     [Required] public string Description { get; set; }
     [Required] public string Address { get; set; }
     [Required] public double Price { get; set; }
-    [Required] public string Furniture { get; set; }
+    
+    // [Required] public string Furniture { get; set; }
     [Required] public double Area { get; set; }
     [Required] public int Floor { get; set; }
     [Required] public int Bedroom { get; set; }
     [Required] public int Bathroom { get; set; }
 
+    public DateTime? ExpiryDate { get; set; }
+    
     [Required] public List<IFormFile> propertyImages { get; set; }
     [Required] public IFormFile coverImage { get; set; }
 

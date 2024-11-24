@@ -247,6 +247,7 @@ public class ExcelReader
                 JuridicalId = worksheet.Cells[row, 15].Text,
                 WardId = int.Parse(worksheet.Cells[row, 16].Text),
                 UserId = worksheet.Cells[row, 17].Text,
+                ExpiryDate = Convert.ToDateTime(worksheet.Cells[row, 18].Text),
             };
             entities.Add(entity);
         }

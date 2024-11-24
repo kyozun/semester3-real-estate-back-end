@@ -124,6 +124,8 @@ public class PropertyRepository : IPropertyRepository
                 : properties.OrderBy(x => x.ViewCount);
         }
 
+        // Tìm những Property còn hạn
+        // properties = properties.Where(x => x.ExpiryDate > DateTime.Now);
 
         // Include
         properties = properties.Include(x => x.Ward).Include(x => x.Juridical).Include(x => x.Category)
@@ -275,6 +277,10 @@ public class PropertyRepository : IPropertyRepository
 
         var userId = _httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         property.UserId = userId;
+        if (createPropertyDto.ExpiryDate != null)
+        {
+            property.ExpiryDate = (DateTime)createPropertyDto.ExpiryDate;
+        }
 
         // Bắt đầu transaction
         await using var transaction = await _context.Database.BeginTransactionAsync();
