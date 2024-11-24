@@ -129,4 +129,61 @@ public class PropertyController : ControllerBase
             return BadRequest();
         }
     }
+    
+    // POST
+    [SwaggerOperation(Summary = "Tạo Draft Property")]
+    [HttpPost]
+    [Route("draft")]
+    [Authorize]
+    public async Task<ActionResult> CreateDraftProperty([FromForm] CreatePropertyDto createPropertyDto
+    )
+    {
+        try
+        {
+            var result = await _propertyRepository.CreateDraftProperty(createPropertyDto);
+            return result switch
+            {
+                HttpStatusCode.OK => Ok(new OkResponse()),
+                HttpStatusCode.Forbidden => Forbid(),
+                HttpStatusCode.Conflict => Conflict(),
+                _ => BadRequest()
+            };
+        }
+        catch (Exception)
+        {
+            return BadRequest();
+        }
+    }
+
+    [SwaggerOperation(Summary = "Tìm Darft Property theo điều kiện")]
+    [HttpGet]
+    [Route("draft")]
+    public async Task<ActionResult<Response<PropertyAndMoreDto>>> GetDarftProperties(
+        [FromQuery] PropertyQuery propertyQuery)
+    {
+        var properties = await _propertyRepository.GetDraftProperties(propertyQuery);
+        var propertyAndMoresDto = properties.Select(x => x.ConvertToPropertyAndMoreDto()).ToList();
+        var total = propertyAndMoresDto.Count;
+        var limit = propertyQuery.Limit;
+        var offset = propertyQuery.Offset;
+        return Ok(new Response<PropertyAndMoreDto>(propertyAndMoresDto, total, limit, offset));
+    }
+
+    // GET BY ID
+    [SwaggerOperation(Summary = "Tìm Draft Property theo ID")]
+    [HttpGet]
+    [Route("draft/{propertyId:guid}")]
+    public async Task<ActionResult<PropertyAndMoreDto>> GetDraftPropertyById([FromRoute] Guid propertyId)
+    {
+        try
+        {
+            var property = await _propertyRepository.GetDraftPropertyById(propertyId.ToString());
+            if (property == null) return NotFound();
+            return Ok(property.ConvertToPropertyAndMoreDto());
+        }
+        catch (Exception)
+        {
+            return BadRequest();
+        }
+    }
 }

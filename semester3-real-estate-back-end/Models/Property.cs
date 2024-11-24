@@ -14,6 +14,8 @@ public class Property
     public int ViewCount { get; set; }
     public string CoverImage { get; set; }
 
+    public bool IsDraft { get; set; } = false;
+
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
 

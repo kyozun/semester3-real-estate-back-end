@@ -146,9 +146,202 @@ public class PropertyRepository : IPropertyRepository
         return property;
     }
 
+    public async Task<Property?> GetDraftPropertyById(string propertyId)
+    {
+        var properties = _context.Property.AsQueryable();
+
+        // Include
+        properties = properties.Include(x => x.Ward).Include(x => x.Juridical).Include(x => x.Category)
+            .Include(x => x.PropertyType).Include(x => x.Direction).Include(x => x.PropertyImages).Include(x => x.User);
+
+        var property = await properties.FirstOrDefaultAsync(x => x.PropertyId == propertyId && x.IsDraft == true);
+        return property;
+    }
+
+    public async Task<IEnumerable<Property>> GetDraftProperties(PropertyQuery propertyQuery)
+    {
+        var properties = _context.Property.AsQueryable();
+
+        // Tìm theo Title
+        if (!string.IsNullOrWhiteSpace(propertyQuery.Title))
+            properties = properties.Where(x => x.Title.ToLower().Contains(propertyQuery.Title.ToLower()));
+
+
+        // Tìm theo Price
+        if (!string.IsNullOrWhiteSpace(propertyQuery.Price))
+        {
+            var minPrice = double.Parse(propertyQuery.Price.Split("-")[0]);
+            var maxPrice = double.Parse(propertyQuery.Price.Split("-")[1]);
+            properties = properties.Where(x => minPrice <= x.Price && x.Price <= maxPrice);
+        }
+
+        // Tìm theo Floor
+        if (propertyQuery.Floor is > 0)
+        {
+            properties = properties.Where(x => x.Floor == propertyQuery.Floor);
+        }
+
+        // Tìm theo Bedroom
+        if (propertyQuery.Bedroom is > 0)
+        {
+            properties = properties.Where(x => x.Bedroom == propertyQuery.Bedroom);
+        }
+
+        // Tìm theo Bathroom
+        if (propertyQuery.Bathroom is > 0)
+        {
+            properties = properties.Where(x => x.Bathroom == propertyQuery.Bathroom);
+        }
+
+        // Tìm theo Area
+        if (!string.IsNullOrWhiteSpace(propertyQuery.Area))
+        {
+            var minArea = double.Parse(propertyQuery.Area.Split("-")[0]);
+            var maxArea = double.Parse(propertyQuery.Area.Split("-")[1]);
+            properties = properties.Where(x => minArea <= x.Area && x.Area <= maxArea);
+        }
+
+
+        // Tìm theo PropertyIds
+        if (!propertyQuery.PropertyIds.IsNullOrEmpty())
+        {
+            properties = properties.Where(x =>
+                propertyQuery.PropertyIds!.Select(y => y.ToString()).Contains(x.PropertyId));
+        }
+
+        // Tìm theo UserIds
+        if (!propertyQuery.UserIds.IsNullOrEmpty())
+        {
+            properties = properties.Where(x =>
+                propertyQuery.UserIds!.Select(y => y.ToString()).Contains(x.UserId));
+        }
+
+        // Tìm theo DirectionIds
+        if (!propertyQuery.DirectionIds.IsNullOrEmpty())
+        {
+            properties = properties.Where(x =>
+                propertyQuery.DirectionIds!.Select(y => y.ToString()).Contains(x.DirectionId));
+        }
+
+        // Tìm theo PropertyTypeIds
+        if (!propertyQuery.PropertyTypeIds.IsNullOrEmpty())
+        {
+            properties = properties.Where(x =>
+                propertyQuery.PropertyTypeIds!.Select(y => y.ToString()).Contains(x.PropertyTypeId));
+        }
+
+        // Tìm theo CategoryIds
+        if (!propertyQuery.CategoryIds.IsNullOrEmpty())
+        {
+            properties = properties.Where(x =>
+                propertyQuery.CategoryIds!.Select(y => y.ToString()).Contains(x.CategoryId));
+        }
+
+        // Tìm theo JuridicalIds
+        if (!propertyQuery.JuridicalIds.IsNullOrEmpty())
+        {
+            properties = properties.Where(x =>
+                propertyQuery.JuridicalIds!.Select(y => y.ToString()).Contains(x.JuridicalId));
+        }
+
+        // Tìm theo WardId
+        if (propertyQuery.WardId != null)
+        {
+            properties = properties.Where(x =>
+                propertyQuery.WardId == x.WardId);
+        }
+
+        // Sort by View
+        if (propertyQuery.SortBy?.View != null)
+        {
+            properties = propertyQuery.SortBy.View == SortBy.Desc
+                ? properties.OrderByDescending(x => x.ViewCount)
+                : properties.OrderBy(x => x.ViewCount);
+        }
+
+        properties = properties.Where(x => x.IsDraft == true);
+
+        // Include
+        properties = properties.Include(x => x.Ward).Include(x => x.Juridical).Include(x => x.Category)
+            .Include(x => x.PropertyType).Include(x => x.Direction).Include(x => x.PropertyImages).Include(x => x.User);
+
+
+        return await properties.Skip(propertyQuery.Offset).Take(propertyQuery.Limit).ToListAsync();
+    }
+
     public async Task<HttpStatusCode> CreateProperty(CreatePropertyDto createPropertyDto)
     {
         var property = createPropertyDto.ConvertToProperty();
+
+        var userId = _httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+        property.UserId = userId;
+
+        // Bắt đầu transaction
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+        try
+        {
+            // Kiểm tra name đã tồn tại chưa
+            var existingProperty =
+                await _context.Property.FirstOrDefaultAsync(x => x.Title.ToLower() == property.Title.ToLower());
+
+            if (existingProperty != null)
+                // Nếu đã tồn tại, trả về lỗi Conflict (409)
+                return HttpStatusCode.Conflict;
+
+
+            // Lưu ảnh bìa
+            if (createPropertyDto.coverImage.Length > 0)
+            {
+                var imageUrl = await SaveImageAsync(createPropertyDto.coverImage);
+                property.CoverImage = imageUrl;
+            }
+
+
+            // Lưu vào database
+            await _context.AddAsync(property);
+            await _context.SaveChangesAsync();
+
+
+            // Lưu ảnh property
+            foreach (var image in createPropertyDto.propertyImages)
+            {
+                if (image.Length > 0)
+                {
+                    var imageUrl = await SaveImageAsync(image);
+
+                    var propertyImage = new PropertyImage
+                    {
+                        PropertyImageId = Guid.NewGuid().ToString(),
+                        PropertyId = property.PropertyId,
+                        Description = "Description",
+                        ImageUrl = imageUrl
+                    };
+
+                    await _context.AddAsync(propertyImage);
+                }
+            }
+
+            // Lưu vào database
+            await _context.SaveChangesAsync();
+
+            // Commit transaction nếu các dòng ở trên thành công
+            await transaction.CommitAsync();
+        }
+
+        catch (Exception)
+        {
+            // Rollback transaction nếu có lỗi
+            await transaction.RollbackAsync();
+            return HttpStatusCode.BadRequest;
+        }
+
+        return HttpStatusCode.OK;
+    }
+
+    public async Task<HttpStatusCode> CreateDraftProperty(CreatePropertyDto createPropertyDto)
+    {
+        var property = createPropertyDto.ConvertToProperty();
+        property.IsDraft = true;
 
         var userId = _httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         property.UserId = userId;
