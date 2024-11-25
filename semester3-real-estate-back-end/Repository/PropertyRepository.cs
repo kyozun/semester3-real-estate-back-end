@@ -277,10 +277,7 @@ public class PropertyRepository : IPropertyRepository
 
         var userId = _httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         property.UserId = userId;
-        if (createPropertyDto.ExpiryDate != null)
-        {
-            property.ExpiryDate = (DateTime)createPropertyDto.ExpiryDate;
-        }
+      
 
         // Bắt đầu transaction
         await using var transaction = await _context.Database.BeginTransactionAsync();

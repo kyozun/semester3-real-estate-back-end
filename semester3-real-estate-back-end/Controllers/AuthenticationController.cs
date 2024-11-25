@@ -34,35 +34,47 @@ public class AuthenticationController : ControllerBase
     {
         try
         {
+            // Create a new User object
             var user = new User
             {
                 UserName = registerDto.Username,
                 Email = registerDto.Email
             };
-            var createdUser = await _userManager.CreateAsync(user, registerDto.Password);
-            if (createdUser.Succeeded)
+
+            // Attempt to create the user
+            var createResult = await _userManager.CreateAsync(user, registerDto.Password);
+
+            if (!createResult.Succeeded)
             {
-                var roleResult = await _userManager.AddToRoleAsync(user, "User");
-                if (roleResult.Succeeded)
-                {
-                    var roles = await _userManager.GetRolesAsync(user);
-                    return Ok(new UserAndMoreDto
-                    {
-                        UserName = user.UserName, Email = user.Email, Token = _tokenService.CreateToken(user, roles)
-                    });
-                }
-
-
-                return StatusCode(400, roleResult.Errors);
+                return BadRequest(new { Errors = createResult.Errors });
             }
 
-            return StatusCode(400, createdUser.Errors);
+            var roleResult = await _userManager.AddToRoleAsync(user, "User");
+
+            if (!roleResult.Succeeded)
+            {
+                return StatusCode(500, new { Errors = roleResult.Errors });
+            }
+
+            // Retrieve the user's roles
+            var roles = await _userManager.GetRolesAsync(user);
+
+            // Return the user data along with a token
+            return Ok(new UserAndMoreDto
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                Token = _tokenService.CreateToken(user, roles)
+            });
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return StatusCode(400);
+            // Log the exception (recommended in production applications)
+            // Return a generic error message
+            return StatusCode(500, new { Message = "An unexpected error occurred.", Details = ex.Message });
         }
     }
+
 
 
     // Login

@@ -16,7 +16,7 @@ public class Property
 
     public bool IsDraft { get; set; } = false;
     
-    public DateTime ExpiryDate {get; set;}
+    public DateTime ExpiryDate {get; set;} 
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
